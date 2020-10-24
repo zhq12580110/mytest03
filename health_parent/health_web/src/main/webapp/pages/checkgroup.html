@@ -287,7 +287,7 @@
             //编辑
             handleEdit() {
                 //提交检查组信息-发送请求到后台
-                axios.post('/checkgroup/update.do?checkitemIds=' + this.checkitemIds).then(response => {
+                axios.post('/checkgroup/update.do?checkitemIds=' + this.checkitemIds, this.formData).then(response => {
                     this.$message({
                         message: response.data.message,
                         type: response.data.flag ? "success" : "error"
@@ -337,6 +337,8 @@
                 this.activeName = 'first';
                 // 清除钩选
                 this.checkitemIds = [];
+                //
+                this.tableData = [];
             },
             // 弹出添加窗口
             handleCreate() {
@@ -358,7 +360,7 @@
                 //调用重置表单的方法
                 this.resetForm();
                 //弹出编辑窗口
-                this.dialogFormVisible = true;
+                this.dialogFormVisible4Edit = true;
 
                 //发送请求到后台
                 axios.get('/checkgroup/findById.do?checkGroupId=' + row.id).then(response => {
